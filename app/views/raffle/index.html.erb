@@ -3,6 +3,7 @@
 <!-- Add controller for javascript -->
 <div ng-controller="RaffleCtrl">
 
+ <!-- addEntry() function in raffle.js.coffee call on click via ng-submit attribute-->
 	<form ng-submit="addEntry()">
 		<!-- newEntry is the model, .name is the attribute -->
 		<input type="text" ng-model="newEntry.name">
@@ -13,7 +14,8 @@
 		<li ng-repeat="entry in entries">
 			{{entry.name}}
 			<!-- only show if it is a winner using ng-show attribute eval to true -->
-			<span ng-show="entry.winner" class="winner">WINNER WINNER CHICKEN DINNER</span>
+			<!-- ng-class with expression {} to add class highlight if entry == lastWinner truthy -->
+			<span ng-show="entry.winner" ng-class="{highlight: entry == lastWinner}" class="winner">WINNER WINNER CHICKEN DINNER</span>
 		</li>
 	</ul>
 
