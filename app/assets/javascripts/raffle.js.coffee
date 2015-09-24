@@ -1,3 +1,4 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+# $scope object is used to interfact with view
+# Add @ to RaffleCtrl to make it accessible in controller
+angular.module('Raffler', []).controller "RaffleCtrl", ($scope) ->
+	$scope.entries = [{name:"Ryan"},{name:"Peyton"}, {name:"Laura"}, {name:"Penny"}]
