@@ -24,7 +24,12 @@
 	{{newEntry.name}}
 
 	<button ng-click="drawWinner()">Draw Winner</button>
-	<button ng-click="clearWinners()">Clear Raffle</button>
+	<button ng-click="clearRaffle()">Clear Raffle</button>
+	<div class="panel" ng-class="{hide: drawCount == 0}">
+	<h3>Stats</h3>
+	<p><b>Draw Count:</b> {{drawCount}}</p>
+	<p><b>Winner:</b> {{lastWinner.name}}</p>
+	</div>
 </div>
 
 

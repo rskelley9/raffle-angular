@@ -17,6 +17,9 @@ angular.module('Raffler', []).controller "RaffleCtrl", ($scope) ->
     {name:"Wee"}
   ]
 
+  # initialize a counter to track raffle draws
+  $scope.drawCount = 0
+
   # call when the form is submitted/ENTER is pressed
   $scope.addEntry = ->
     # Append entry to end of entries array
@@ -43,9 +46,11 @@ angular.module('Raffler', []).controller "RaffleCtrl", ($scope) ->
       # set the last winner to the winning entry object
       # so span.winner highlights when ng-class is truthy
       $scope.lastWinner = entry
+      $scope.drawCount++
 
   # call on Clear Raffle button click event
-  $scope.clearWinners = ->
+  $scope.clearRaffle = ->
     $scope.lastWinner = null
     angular.forEach $scope.entries, (entry) ->
       entry.winner = false
+    $scope.drawCount = 0
