@@ -1,21 +1,30 @@
 # Create RaffleCtrl controller function by calling it on app 'Raffler' angular module
 # name is specified in html ng-app="Raffler" attribute in layout
-angular.module('Raffler', []).controller "RaffleCtrl", ($scope) ->
+## define ngResource as a dependency for module to take advantage of angular-resource
+## allows us to use $resource to communicate over REST API.
+app = angular.module('Raffler', ["ngResource"]).controller "RaffleCtrl", ($scope, $resource) ->
+  # second arg specifies default paremeters, the current object's id to append to /entries/ url
+  Entry = $resource("/entries/:id", {id: "@id"}, {update: {method: "PUT"}})
   # Note: $scope object is used to interface with view like 'this' in jQuery
-  $scope.entries = [
-    {name:"Ryan"}
-    {name:"Laura"}
-    {name:"Peyton"}
-    {name:"Penny"}
-    {name:"Casey"}
-    {name:"Hershey"}
-    {name:"Angelica"}
-    {name:"Bobby"}
-    {name:"Peanut"}
-    {name:"Bruce"}
-    {name:"Finley"}
-    {name:"Wee"}
-  ]
+
+  ## retrieves entries array from database via json api
+  $scope.entries = Entry.query()
+
+  ## or you can hard code in an array of entry objects
+  # $scope.entries = [
+  #   {name:"Ryan"}
+  #   {name:"Laura"}
+  #   {name:"Peyton"}
+  #   {name:"Penny"}
+  #   {name:"Casey"}
+  #   {name:"Hershey"}
+  #   {name:"Angelica"}
+  #   {name:"Bobby"}
+  #   {name:"Peanut"}
+  #   {name:"Bruce"}
+  #   {name:"Finley"}
+  #   {name:"Wee"}
+  # ]
 
   # initialize a counter to track raffle draws
   $scope.drawCount = 0
