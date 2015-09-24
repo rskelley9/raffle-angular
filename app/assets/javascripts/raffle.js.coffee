@@ -1,3 +1,6 @@
+## This is a practice application and the comments are used as a guide while I followed RailsCast 405
+## -----------------------------------------------------------------------------
+
 # Create RaffleCtrl controller function by calling it on app 'Raffler' angular module
 # name is specified in html ng-app="Raffler" attribute in layout
 ## define ngResource as a dependency for module to take advantage of angular-resource
@@ -31,8 +34,13 @@ app = angular.module('Raffler', ["ngResource"]).controller "RaffleCtrl", ($scope
 
   # call when the form is submitted/ENTER is pressed
   $scope.addEntry = ->
-    # Append entry to end of entries array
-    $scope.entries.push($scope.newEntry)
+    # Save a new entry to the database
+    entry = Entry.save($scope.newEntry)
+    # Append entry to end of entries array if using hard-coded approach
+    $scope.entries.push(entry)
+    $scope.newEntry = {}
+
+
     # Set to empty object
     $scope.newEntry = {}
 
@@ -52,12 +60,17 @@ app = angular.module('Raffler', ["ngResource"]).controller "RaffleCtrl", ($scope
       # set entry object winner attribute to true
       # so WINNER message is shown when ng-show entry.winner evals to true
       entry.winner = true
+
+      # Update entry in database
+      Entry.update(entry)
+
       # set the last winner to the winning entry object
       # so span.winner highlights when ng-class is truthy
       $scope.lastWinner = entry
       $scope.drawCount++
 
   # call on Clear Raffle button click event
+  # TODO: UPDATE DATABASE ACCORDINGLY
   $scope.clearRaffle = ->
     $scope.lastWinner = null
     angular.forEach $scope.entries, (entry) ->
