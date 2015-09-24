@@ -3,10 +3,7 @@
 <!-- Add controller for javascript -->
 <div ng-controller="RaffleCtrl">
 
-<!-- newEntry is the object we're working with on this form
-name is the attribute of that object for that field -->
-
-	<form>
+	<form ng-submit="addEntry() ">
 		<input type="text" ng-model="newEntry.name">
 	</form>
 
@@ -17,8 +14,9 @@ name is the attribute of that object for that field -->
 		</li>
 	</ul>
 
-<!-- # output newEntry.name with curly braces -->
-<!-- {{newEntry.name}} -->
+<!-- # output newEntry.name with curly braces
+This adds an entry to end of list -->
+{{newEntry.name}}
 
 </div>
 
