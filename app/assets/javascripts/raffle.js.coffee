@@ -16,18 +16,23 @@ angular.module('Raffler', []).controller "RaffleCtrl", ($scope) ->
     {name:"Finley"}
     {name:"Wee"}
   ]
+
   # call when the form is submitted/ENTER is pressed
   $scope.addEntry = ->
     # Append entry to end of entries array
     $scope.entries.push($scope.newEntry)
     # Set to empty object
     $scope.newEntry = {}
+
   $scope.drawWinner = ->
+
     # create a pool to limit selection to those that haven't already won
     pool = []
+
     # only add entry object to pool if entry is not a winner
     angular.forEach $scope.entries, (entry) ->
       pool.push(entry) if !entry.winner
+
     # when pool has entries in it, select a random entry from pool to be winner
     # via random slice
     if pool.length > 0
@@ -38,3 +43,9 @@ angular.module('Raffler', []).controller "RaffleCtrl", ($scope) ->
       # set the last winner to the winning entry object
       # so span.winner highlights when ng-class is truthy
       $scope.lastWinner = entry
+
+  # call on Clear Raffle button click event
+  $scope.clearWinners = ->
+    $scope.lastWinner = null
+    angular.forEach $scope.entries, (entry) ->
+      entry.winner = false
