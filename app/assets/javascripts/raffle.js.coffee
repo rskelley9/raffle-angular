@@ -8,8 +8,15 @@ angular.module('Raffler', []).controller "RaffleCtrl", ($scope) ->
 		{name:"Penny"}
 	]
 
+  # call when the form is submitted/ENTER is pressed
 	$scope.addEntry = ->
   	# Append entry to end of enties array
   	$scope.entries.push($scope.newEntry)
   	# Set to empty object
   	$scope.newEntry = {}
+
+  $scope.drawWinner = ->
+  	# select a random item by slicing array randomly
+  	entry = $scope.entries[Math.floor(Math.random()*$scope.entries.length)]
+  	# set entry object winner attribute to true to show span.winner when ng-show evals to true
+  	entry.winner = true

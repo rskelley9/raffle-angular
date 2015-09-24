@@ -3,21 +3,25 @@
 <!-- Add controller for javascript -->
 <div ng-controller="RaffleCtrl">
 
-	<form ng-submit="addEntry() ">
+	<form ng-submit="addEntry()">
+		<!-- newEntry is the model, .name is the attribute -->
 		<input type="text" ng-model="newEntry.name">
 	</form>
 
 	<ul>
-	<!-- Loop through each entry with ng-repeat -->
+		<!-- Loop through each entry with ng-repeat -->
 		<li ng-repeat="entry in entries">
 			{{entry.name}}
+			<!-- only show if it is a winner using ng-show attribute eval to true -->
+			<span ng-show="entry.winner" class="winner">WINNER WINNER CHICKEN DINNER</span>
 		</li>
 	</ul>
 
 <!-- # output newEntry.name with curly braces
-This adds an entry to end of list -->
-{{newEntry.name}}
+	This adds an entry to end of list -->
+	{{newEntry.name}}
 
+	<button ng-click="drawWinner()">Draw Winner</button>
 </div>
 
 
